@@ -1,0 +1,16 @@
+{
+  "create_universe_command_name": "creer_nouvel_univers",
+  "create_universe_command_description" : "Créé un nouvel univers roleplay sur ce serveur.",
+  "create_universe_name_option": "nom",
+  "create_universe_name_option_description": "Indique le nom de l'univers roleplay.",
+  "create_universe_partial_setup_option": "setup_complet",
+  "create_universe_partial_setup_option_description": "Indique si le serveur doit être partiellement ou totalement setup. Plus d'info avec /help setup",
+  "universe_already_exist_title" : "Univers déjà éxistant",
+  "universe_already_exist" : "Un univers existe déjà pour ce serveur.",
+  "universe_success_title" : "Univers créé",
+  "universe_success_setup" : "Le serveur à été lié à l'univers avec succès.",
+  "speed_modifier_option" : "multiplicateur_vitesse",
+  "speed_modifier_option_description" : "Indique le multiplicateur de vitesse de l'univers. (1 par défaut)",
+  "speed_modifier_value_error_title" : "Multiplicateur de vitesse invalide",
+  "speed_modifier_value_error" : "Le multiplicateur de vitesse doit être un nombre entier ou décimal positif."
+}

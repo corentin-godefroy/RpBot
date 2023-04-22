@@ -1,0 +1,16 @@
+{
+  "create_universe_command_name": "create_new_universe",
+  "create_universe_command_description" : "Create a new roleplaying universe on this server.",
+  "create_universe_name_option": "name",
+  "create_universe_name_option_description": "Provide a name for the roleplaying universe.",
+  "create_universe_partial_setup_option": "partial_setup",
+  "create_universe_partial_setup_option_description": "Indicate if the server should be fully setup or partialy. More information with /help setup",
+  "universe_already_exist_title" : "Universe already exists",
+  "universe_already_exist" : "A Universe already exists for this guild.",
+  "universe_success_title" : "Universe created",
+  "universe_success_setup" : "The universe has been successfully linked to this guild.",
+  "speed_modifier_option" : "speed_multiplier",
+  "speed_modifier_option_description" : "Indicates the speed multiplier for the universe. (1 by default)",
+  "speed_modifier_value_error_title" : "Speed modifier value error",
+  "speed_modifier_value_error" : "The speed modifier must be an positive integer or a float."
+}
