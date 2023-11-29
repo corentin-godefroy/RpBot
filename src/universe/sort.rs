@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use serenity::client::Context;
 use serenity::model::channel::ChannelType;
 use serenity::model::guild::PartialGuild;
-use crate::constants::{CREATE_UNIVERSE_CAMMAND_LOCALE_DESCRIPTION, CREATE_UNIVERSE_COMMAND_LOCALE_NAME, CREATE_UNIVERSE_NAME_LOCALE_OPTION, CREATE_UNIVERSE_NAME_OPTION_LOCALE_DESCRIPTION, DEFAULT_LANG, RPBOT_BDD, UNIVERSE_COLLECTION, SERVERS_UNIVERSE_FIELD, CREATE_UNIVERSE_ERROR_UNIVERSE_ALREADY_EXIST, UNIVERSE_NAME_FIELD, CREATE_UNIVERSE_SUCCESS, CREATE_UNIVERSE_SUCCESS_TITLE, CREATE_UNIVERSE_ERROR_ALREADY_EXIST_TITLE, UNIVERSE_ADMIN_ID, CREATE_UNIVERSE_PARTIAL_SETUP_OPTION, CREATE_UNIVERSE_PARTIAL_SETUP_OPTION_DESCRIPTION, ADMIN_ROLE, MODO_ROLE, PLAYER_ROLE, PLAYER_ROLE_COLOR, SERVER_COLLECTION, SERVER_ID, ADMIN_ROLE_ID, MODERATOR_ROLE_ID, PLAYER_ROLE_ID, ADMIN_CATEGORY_NAME, NRP_CATEGORY_NAME, RP_CATEGORY_NAME, ROAD_CATEGORY_NAME, ROAD_CATEGORY_ID, RP_CATEGORY_ID, NRP_CATEGORY_ID, ADMIN_CATEGORY_ID, ADMIN_MODERATION_CHANNEL_NAME, ADMIN_COMMANDS_CHANNEL_NAME, NRP_GENERAL_CHANNEL_NAME, NRP_GENERAL_RULES_CHANNEL_NAME, RP_STORY_CHANNEL_NAME, RP_PLAYER_CHARACTERS_CHANNEL_NAME, RP_INDEX_CHANNEL_NAME, RP_RULES_CHANNEL_NAME, RP_QA_CHANNEL_NAME, NRP_RP_EXCHANGES_CHANNEL_NAME, GREEN_COLOR, SPECTATOR_ROLE, SPECTATOR_ROLE_ID};
+use crate::constants::{NRP_GENERAL_VOICE_CHANNEL_NAME, ADMIN_ROLE, MODERATOR_ROLE, PLAYER_ROLE, ADMIN_CATEGORY_NAME, NRP_CATEGORY_NAME, RP_CATEGORY_NAME, ROAD_CATEGORY_NAME, ADMIN_MODERATION_CHANNEL_NAME, ADMIN_COMMANDS_CHANNEL_NAME, NRP_GENERAL_CHANNEL_NAME, NRP_GENERAL_RULES_CHANNEL_NAME, RP_STORY_CHANNEL_NAME, RP_PLAYER_CHARACTERS_CHANNEL_NAME, RP_INDEX_CHANNEL_NAME, RP_RULES_CHANNEL_NAME, RP_QA_CHANNEL_NAME, NRP_RP_EXCHANGES_CHANNEL_NAME, SPECTATOR_ROLE};
 
 pub async fn sort_channels(ctx : &Context, guild : &PartialGuild){
     let channels = guild.channels(&ctx.http).await.unwrap();
@@ -81,7 +81,7 @@ pub async fn sort_channels(ctx : &Context, guild : &PartialGuild){
                 match channel_parent.category().unwrap().name.as_str() {
                     NRP_CATEGORY_NAME => {
                         match channel.name.as_str() {
-                            NRP_VOICE_CHANNEL_NAME => {
+                            NRP_GENERAL_VOICE_CHANNEL_NAME => {
                                 sorted_channels.insert(channel.id, 8);
                             }
                             _ => {}
@@ -115,7 +115,7 @@ pub async fn sort_roles(ctx : &Context, guild : &PartialGuild){
             ADMIN_ROLE => {
                 sorted_roles.insert(role.id, 4);
             }
-            MODO_ROLE => {
+            MODERATOR_ROLE => {
                 sorted_roles.insert(role.id, 3);
             }
             SPECTATOR_ROLE => {
@@ -127,5 +127,5 @@ pub async fn sort_roles(ctx : &Context, guild : &PartialGuild){
             _ => {}
         }
     }
-    guild.edit_roles_positions(&ctx, sorted_roles).await.unwrap();
+    guild.reorder_roles(&ctx, sorted_roles).await.unwrap();
 }

@@ -3,11 +3,11 @@ use std::io::Read;
 use json::JsonValue;
 use std::collections::HashMap;
 use crate::common_functions::{log};
-use crate::common_functions::LogType::*;
-use crate::constants::{DEFAULT_LANG, FR_LANG};
+use crate::common_functions::ReportType::*;
+use crate::constants::{DEFAULT_LANG, EN_LANG, FR_LANG};
 use crate::LANGS;
 
-const FILENAMES: [&str; 2] = [DEFAULT_LANG, FR_LANG];
+const FILENAMES: [&str; 3] = [DEFAULT_LANG, FR_LANG, EN_LANG];
 
 pub fn lang_loader(langs_map: &mut HashMap<&str, JsonValue>){
     for filename in FILENAMES {
@@ -36,10 +36,10 @@ pub fn lang_loader(langs_map: &mut HashMap<&str, JsonValue>){
 }
 
 pub fn get_key(locale: &str, key : &str) -> String {
-    match LANGS.get().unwrap().get(locale){
+    return match LANGS.get().unwrap().get(locale) {
         //TODO changer le retour d'erreur par la langue par défaut et afficher un warning
         None => {
-            return match LANGS.get().unwrap().get(DEFAULT_LANG) {
+            match LANGS.get().unwrap().get(DEFAULT_LANG) {
                 None => {
                     log(ERROR,
                         format!("Locales \"{locale}\" and \"{DEFAULT_LANG}\" not found.").as_str()
@@ -58,16 +58,15 @@ pub fn get_key(locale: &str, key : &str) -> String {
             let value = locale_found[key].to_string();
             if value == "null" && locale.to_string().eq(DEFAULT_LANG) {
                 log(ERROR,
-                    format!("Key \"{key}\" for locales \"{locale}\" not found. \"not_found\" is returned").as_str() );
+                    format!("Key \"{key}\" for locales \"{locale}\" not found. \"not_found\" is returned").as_str());
                 return "not_found".to_string()
-            }
-            else if value == "null"{
+            } else if value == "null" {
                 log(WARNING,
                     format!("Locale \"{locale}\" not found for \"{key}\". \"{DEFAULT_LANG}\" are loaded instead for this key.").as_str());
                 return get_key(DEFAULT_LANG, key);
             }
 
-            return value
+            value
         }
     }
 }
